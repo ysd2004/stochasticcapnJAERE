@@ -1,11 +1,11 @@
 # stochasticcapnJAERE
-This repository is to share the *R* data and code replicating the main results submitted to JAERE by Abbott, Fenichel, and Yun.\
-\
-GitHub Repository maintained by: Seong Yun\
-Department of Agricultural Economics\
-Mississippi State University\
-**<seong.yun@msstate.edu>**\
-**<https://sites.google.com/site/yunsd2004/>**\
+This repository is to share the *R* data and code replicating the main results submitted to JAERE by Abbott, Fenichel, and Yun.
+
+GitHub Repository maintained by: Seong Yun
+Department of Agricultural Economics
+Mississippi State University
+**<seong.yun@msstate.edu>**
+**<https://sites.google.com/site/yunsd2004/>**
 *Last updated: Nov. 25, 2024*
 ------------------------------------------------------------------------
 
