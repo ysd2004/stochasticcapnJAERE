@@ -1,4 +1,4 @@
-# stochasticcapnJAERE
+# Replicable Examples: Abbott, Fenichel, and Yun
 
 This repository is to share the *R* data and code replicating the main results submitted to JAERE by Abbott, Fenichel, and Yun.
 
