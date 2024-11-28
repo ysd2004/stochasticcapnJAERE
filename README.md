@@ -13,7 +13,6 @@ Mississippi State University\
 
 0 Manuscript information
 ====================================
-To implement the V-approximation suggested in the manuscript, we provide the pre-defined R-functions. Before replication the following examples, these functions should be loaded at first.
 
 ```r
   Abbott, K. Joshua, Eli P. Fenichel, and Seong, D. Yun, "Risky (Natural) Assets: Stochasticity and the Value of Natural Capital"
