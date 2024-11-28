@@ -1,5 +1,7 @@
 # Replicable Examples: Abbott, Fenichel, and Yun
 
+[![DOI](https://zenodo.org/badge/416073206.svg)](https://zenodo.org/badge/latestdoi/416073206)
+
 This repository is to share the *R* data and code replicating the main results submitted to JAERE by Abbott, Fenichel, and Yun.
 
 GitHub Repository maintained by: Seong Yun\
