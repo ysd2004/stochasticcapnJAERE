@@ -21,7 +21,7 @@ Manuscript information
 Example 1: Optimized and non-optimized renewable resource management under convexity
 ====================================
 
-## Pindyck (1984)
+## Pindyck (1984) Example
 This example is Example 1 in Pindyck (1984, pp. 296-297), which is Figure 2 and Figure 3 in the manuscript.
 
 * Isoelastic demand function: $q(p) = b p^{-\eta}$
@@ -55,3 +55,25 @@ To download the replication R-code,
 ```
 
 ## Non-CBM stochasticity
+This example extends the GBM volatility to the demographic and environmental stochasticity in Sims, Horan, and Meadows (2018), which is Fgiure5 and Figure6 in the manuscript.
+
+* GBM: $\sigma_{0}^{2} s^{2}$
+
+* demographic and environmental: $\tilde{r}s \left( \frac{\tilde{M}+\tilde{C}}{\tilde{M}-\tilde{C}}  +(1-2 \mu) \frac{s}{\tilde{K}}\right) + \sigma_{M}^{2} \tilde{R}^2 s^{2} \left[ 1 - \frac{s}{K_{1}} \right]^2$
+
+As shown in Table C.1, the economic parameters are the same in Figure 2 and Figure 3. The ecological parameters are:
+
+* $R = 1$
+* $\tilede{M} = 0.53$
+* $\tilde{C} = 0.03$
+* $\tilde{r} = 0.5$
+* $\tilde{K} = 100$
+* $K_{1} = 114.3$
+* $\mu = 1$
+
+To download the replication R-code,
+
+``` r
+    ## In R
+    download.file("https://raw.github.com/ysd2004/stochasticcapnJAERE/main/replicationRcode/Figure5_and_Figure6.R", "Figure5_and_Figure6.R")
+```
