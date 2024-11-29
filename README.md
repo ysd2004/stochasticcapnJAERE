@@ -64,7 +64,7 @@ This example extends the GBM volatility to the demographic and environmental sto
 As shown in Table C.1, the economic parameters are the same in Figure 2 and Figure 3. The ecological parameters are:
 
 * $R = 1$
-* $\tilede{M} = 0.53$
+* $\tilde{M} = 0.53$
 * $\tilde{C} = 0.03$
 * $\tilde{r} = 0.5$
 * $\tilde{K} = 100$
@@ -77,3 +77,45 @@ To download the replication R-code,
     ## In R
     download.file("https://raw.github.com/ysd2004/stochasticcapnJAERE/main/replicationRcode/Figure5_and_Figure6.R", "Figure5_and_Figure6.R")
 ```
+
+Example 2: A stock with non-convex drift and smooth stochasticity
+====================================
+This example is an extension of Fenichel and Abbott (2014) with the cubic growth function. In the deterministic GOM example, the followings are defined.
+
+* Catch function: $h(s,x) = qsx^{\alpha}=qy^{\alpha}s^{\gamma \alpha +1}$ where $x(s)=ys^{\gamma}$
+* Net benefit: $w(s)=pqy^{\alpha}s^{\gamma \alpha +1} - cys^{\gamma}$
+* Logistic growth function: $f(s)=rs \left( 1-\frac{s}{K} \right)$
+
+Supposing all other functions are the same, the stock evolves according to the cubic growth with geometric Brownian motion as:
+
+$$
+ds = \left(rs(t)\left(\frac{s(t)}{K_{1}} -1 \right)\left(1-\frac{s(t)}{K_2}\right)- h\left(x\left(s\left(t\right)\right),s\left(t\right)\right)     \right)dt+ \sigma s(t)dZ(t) \text{,}
+$$
+
+In the example, we used the following parameters in Fenichel and Abbott (2014).
+
+* $r = 0.3847$
+* $q = 0.0003172934$
+* $p = 2.7$
+* $c=153$
+* $\alpha = 0.5436459$
+* $\gamma = 0.7882$
+* $y = 0.157455$
+* $\delta = 0.02$
+* $K = 359016000$
+* $K_{1} = 0.13 K_{2} = 46672080$
+
+To replicate Figure8, download the R-code with:
+
+``` r
+    ## In R
+    download.file("https://raw.github.com/ysd2004/stochasticcapnJAERE/main/replicationRcode/Figure8.R", "Figure8.R")
+```
+
+In the code, there is the line to download the data of all brute force forward simulations (*simresult.rda*) detailed below. 
+
+* *sto00.rda*: deterministic
+* *sto01.rda*: stocastic with $\sigma=0.1$
+* *sto02.rda*: stocastic with $\sigma=0.2$
+* *sto03.rda*: stocastic with $\sigma=0.3$
+
