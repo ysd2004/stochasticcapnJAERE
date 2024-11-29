@@ -54,7 +54,7 @@ To download the replication R-code,
     download.file("https://raw.github.com/ysd2004/stochasticcapnJAERE/main/replicationRcode/Figure2_and_Figure3.R", "Figure2_and_Figure3.R")
 ```
 
-## Non-CBM stochasticity
+## Non-GBM stochasticity
 This example extends the GBM volatility to the demographic and environmental stochasticity in Sims, Horan, and Meadows (2018), which is Fgiure5 and Figure6 in the manuscript.
 
 * GBM: $\sigma_{0}^{2} s^{2}$
@@ -119,3 +119,22 @@ In the code, there is the line to download the data of all brute force forward s
 * *sto02.rda*: stocastic with $\sigma=0.2$
 * *sto03.rda*: stocastic with $\sigma=0.3$
 
+Example 3: A stock with convex drift and stochastic non-convexity
+====================================
+This example provides an extension of the GBM stochasticity in Example 1 with the Poisson Jump under endogenous catastrophic risk.
+
+The stochastic Hamilton-Jacobi-Bellman equation in Equation (G.3) is adopted for the V-approximation.
+
+$$
+\left[\delta+h\left(s\left(t\right)\right)\right]V\left(s\left(t\right)\right) -h\left(s\left(t\right)\right)Z\left(s\left(t\right)\right) = W\left(s\left(t\right)\right) + V_s\dot{s}
+$$
+
+* $h(s) = \frac{\alpha}{\alpha + s(t)}$, where $\alpha =$ 0.5, 2, and 5
+* $Z(s) = W(s=10)/ \delta$
+
+To replicate Figure9, download the R-code with:
+
+``` r
+    ## In R
+    download.file("https://raw.github.com/ysd2004/stochasticcapnJAERE/main/replicationRcode/Figure9.R", "Figure9.R")
+```
