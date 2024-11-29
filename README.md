@@ -21,7 +21,7 @@ Manuscript information
 Example 1: Optimized and non-optimized renewable resource management under convexity
 ====================================
 
-# Pindyck (1984)
+## Pindyck (1984)
 This example is Example 1 in Pindyck (1984, pp. 296-297), which is Figure 2 and Figure 3 in the manuscript.
 
 * Isoelastic demand function: $q(p) = b p^{-\eta}$
@@ -36,12 +36,15 @@ $$
 where $s$ is a stock, $r$ is the intrinsic growth rate, $K$ is the carrying capacity, $q$ is a harvest level, $\sigma$ is stock volatility, and $dZ$ is an increment of a Wiener process.
 
 This example has a closed form solution as:
+
 $$
 \text{Optimzed co-state: } V_s = \phi / s^2 \qquad \text{and}
 $$
+
 $$
 \text{Economic program: } x(s) = q^*(s) = \frac{bs}{(\phi+c)^{(1/2)}} \text{,}
 $$
+
 where $\phi = \frac{2b^2+2b[b^2+c(r+\delta-\sigma^2)^2]^{1/2}}{(r+\delta-\sigma^2)^2}$.
 
 To download the replication R-code,
@@ -51,4 +54,4 @@ To download the replication R-code,
     download.file("https://raw.github.com/ysd2004/stochasticcapnJAERE/main/replicationRcode/Figure2_and_Figure3.R", "Figure2_and_Figure3.R")
 ```
 
-# Non-CBM stochasticity
+## Non-CBM stochasticity
