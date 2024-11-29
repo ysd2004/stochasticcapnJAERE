@@ -62,7 +62,7 @@ wfun <- function(s,q){
 ###############################################################################
 ## Define domains and nodes
 
-## approximation nodes: 30 nodes in (202,114.3)
+## approximation nodes: 30 nodes in (20,114.3)
 nnode <- 30
 lower <- 20
 upper <- K1
