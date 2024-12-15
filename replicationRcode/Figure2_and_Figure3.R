@@ -54,13 +54,10 @@ ss <- uniroot(ssfun,c(0.3,0.8))$root
 nnode <- 35
 lower <- 0.2
 upper <- 1.4
-stockapx <- chebnodegen(35,0.2,1.4)
+stockapx <- chebnodegen(nnode,lower,upper)
 
 ## simulation: 35 nodes in (0.2,1.1)
 stock0 <- chebnodegen(35,0.2,1.1)
-
-## Fig 1: 50 nodes in (0.01,1)
-stockfig <- chebnodegen(50,0.01,1)
 
 ## Optimal
 #########################################################################
@@ -71,16 +68,15 @@ mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
 sigs <- as.matrix((sig*stockapx)^2,ncol=1)
 
 catch.opt <- catch
-catch.opt.fig <- as.matrix(b*((phi +c)^(-1/2))*stockfig,ncol=1)
 
 ## stochastic sig=0.1
 Aspace <- aproxdef(nnode,lower,upper,delta)
 vC.opt.s <- vaprox(Aspace,stockapx,mus,profit,sigs)
-opt.s <- vsim(vC.opt.s,as.matrix(stock0,ncol=1),profit)
+opt.s <- vsim(vC.opt.s,stock0,profit)
 
 ## deterministic sig=0.1
 vC.opt.d <- vaprox(Aspace,stockapx,mus,profit)
-opt.d <- vsim(vC.opt.d,as.matrix(stock0,ncol=1),profit)
+opt.d <- vsim(vC.opt.d,stock0,profit)
 
 
 ### 1/2 catch
@@ -91,15 +87,14 @@ mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
 sigs <- as.matrix((sig*stockapx)^2,ncol=1)
 
 catch.half <- catch
-catch.half.fig <- as.matrix(0.5*b*((phi +c)^(-1/2))*stockfig,ncol=1)
 
 ## stochastic sig=0.1
 vC.opt.half.s <- vaprox(Aspace,stockapx,mus,profit,sigs)
-opt.half.s <- vsim(vC.opt.half.s,as.matrix(stock0,ncol=1),profit)
+opt.half.s <- vsim(vC.opt.half.s,stock0,profit)
 
 ## deterministic sig=0.1
 vC.opt.half.d <- vaprox(Aspace,stockapx,mus,profit)
-opt.half.d <- vsim(vC.opt.half.d,as.matrix(stock0,ncol=1),profit)
+opt.half.d <- vsim(vC.opt.half.d,stock0,profit)
 
 
 ### 1.5 catch
@@ -110,15 +105,14 @@ mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
 sigs <- as.matrix((sig*stockapx)^2,ncol=1)
 
 catch.2x <- catch
-catch.2x.fig <- as.matrix(1.5*b*((phi +c)^(-1/2))*stockfig,ncol=1)
 
 ## stochastic sig=0.1
 vC.opt.2x.s <- vaprox(Aspace,stockapx,mus,profit,sigs)
-opt.2x.s <- vsim(vC.opt.2x.s,as.matrix(stock0,ncol=1),profit)
+opt.2x.s <- vsim(vC.opt.2x.s,stock0,profit)
 
 ## deterministic sig=0.1
 vC.opt.2x.d <- vaprox(Aspace,stockapx,mus,profit)
-opt.2x.d <- vsim(vC.opt.2x.d,as.matrix(stock0,ncol=1),profit)
+opt.2x.d <- vsim(vC.opt.2x.d,stock0,profit)
 
 ### precautious: adaptive
 #########################################################################
@@ -131,22 +125,26 @@ sigs <- as.matrix((sig*stockapx)^2,ncol=1)
 
 catch.adp <- catch
 
-adjust.fig <- 1/(1+1.1*(ss-stockfig))
-
-catch.fig <- as.matrix(adjust.fig*b*((phi +c)^(-1/2))*stockfig,ncol=1)
-catch.adp.fig <- as.matrix(adjust.fig*b*((phi +c)^(-1/2))*stockfig,ncol=1)
-
 ## stochastic sig=0.1
 vC.adaptive.s <- vaprox(Aspace,stockapx,mus,profit,sigs)
-adaptive.s <- vsim(vC.adaptive.s,as.matrix(stock0,ncol=1),profit)
+adaptive.s <- vsim(vC.adaptive.s,stock0,profit)
 
 ## deterministic sig=0.1
 vC.adaptive.d <- vaprox(Aspace,stockapx,mus,profit)
-adaptive.d <- vsim(vC.adaptive.d,as.matrix(stock0,ncol=1),profit)
+adaptive.d <- vsim(vC.adaptive.d,stock0,profit)
 
 ## Optimal: deterministic sig=0
+sig <- 0
+phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(sig^2))^2)))^(1/2))/(((r+delta-(sig^2))^2))
+
+catch <- as.matrix(b*((phi +c)^(-1/2))*stockapx,ncol=1)
+profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
+mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
+
+catch.opt0 <- catch
+
 vC.opt.d0 <- vaprox(Aspace,stockapx,mus,profit)
-opt.d0 <- vsim(vC.opt.d0,as.matrix(stock0,ncol=1),profit)
+opt.d0 <- vsim(vC.opt.d0,stock0,profit)
 
 ## (1/2) catch
 catch <- as.matrix(0.5*b*((phi +c)^(-1/2))*stockapx,ncol=1)
@@ -156,7 +154,7 @@ mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
 catch.half.d0 <- catch
 
 vC.half.d0 <- vaprox(Aspace,stockapx,mus,profit)
-opt.half.d0 <- vsim(vC.half.d0,as.matrix(stock0,ncol=1),profit)
+opt.half.d0 <- vsim(vC.half.d0,stock0,profit)
 
 ## (1.5) catch
 catch <- as.matrix(1.5*b*((phi +c)^(-1/2))*stockapx,ncol=1)
@@ -166,7 +164,7 @@ mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
 catch.2x.d0 <- catch
 
 vC.2x.d0 <- vaprox(Aspace,stockapx,mus,profit)
-opt.2x.d0 <- vsim(vC.2x.d0,as.matrix(stock0,ncol=1),profit)
+opt.2x.d0 <- vsim(vC.2x.d0,stock0,profit)
 
 ## Adaptive
 adjust <- 1/(1+1.1*(ss-stockapx))
@@ -180,7 +178,7 @@ catch.adp0 <- catch
 
 ## deterministic
 vC.adaptive.d0 <- vaprox(Aspace,stockapx,mus,profit)
-adaptive.d0 <- vsim(vC.adaptive.d0,as.matrix(stock0,ncol=1),profit)
+adaptive.d0 <- vsim(vC.adaptive.d0,stock0,profit)
 
 #########################################################################
 ## Figure 2 in the manuscript
