@@ -74,7 +74,7 @@ vsim32$shadowp <- vsim32$shadowp*1000
 
 
 ####################################################
-## Figure 7(a)
+## Figure 8(a)
 ####################################################
 set1 <- data.frame(stock=sto00$stock[1:160],vfun=sto00$vfun[1:160],key='determ1')
 set2 <- data.frame(stock=sto00$stock[161:600],vfun=sto00$vfun[161:600],key='determ2')
@@ -94,15 +94,15 @@ ggplot(data=setall,aes(x=stock,y=vfun)) +
   geom_line(lwd=0.8,aes(col=key,linetype=key)) + 
   scale_linetype_manual(name='',values=c(1,2,2,2),
                         labels = c('Deterministic',
-                                   expression( paste("Stochastic (",sigma," = ","0.1)")),
-                                   expression( paste("Stochastic (",sigma," = ","0.2)")),
-                                   expression( paste("Stochastic (",sigma," = ","0.3)")))) +
+                                   expression( paste("Stochastic (",theta," = ","0.1)")),
+                                   expression( paste("Stochastic (",theta," = ","0.2)")),
+                                   expression( paste("Stochastic (",theta," = ","0.3)")))) +
   #  scale_color_manual(name='',values=c('black','grey40','grey60','grey80'),
   scale_color_manual(name='', values = c('#000000','#3366CC','#0000FF','#9900FF'),
                      labels = c('Deterministic',
-                                expression( paste("Stochastic (",sigma," = ","0.1)")),
-                                expression( paste("Stochastic (",sigma," = ","0.2)")),
-                                expression( paste("Stochastic (",sigma," = ","0.3)")))) +
+                                expression( paste("Stochastic (",theta," = ","0.1)")),
+                                expression( paste("Stochastic (",theta," = ","0.2)")),
+                                expression( paste("Stochastic (",theta," = ","0.3)")))) +
   geom_line(data=set1,lwd=0.8,col='#000000') +
   geom_vline(xintercept=ss1,linetype=2) + 
   geom_vline(xintercept=ss2,linetype=2) + 
@@ -118,7 +118,7 @@ ggplot(data=setall,aes(x=stock,y=vfun)) +
   labs(x='Stock (Million lb)',y='Intertemproal Welafare (V in $ Billions)')
 
 ####################################################
-## Figure 7(b)
+## Figure 8(b)
 ####################################################
 set1 <- data.frame(stock=vsim0p1$stock,shadowp=vsim0p1$shadowp,key='determ1')
 set2 <- data.frame(stock=vsim0p2$stock,shadowp=vsim0p2$shadowp,key='determ2')
@@ -145,15 +145,15 @@ ggplot(data=setall,aes(x=stock,y=shadowp)) +
   geom_line(lwd=0.8,aes(col=key,linetype=key)) + 
   scale_linetype_manual(name='',values=c(1,2,2,2),
                         labels = c('Deterministic',
-                                   expression( paste("Stochastic (",sigma," = ","0.1)")),
-                                   expression( paste("Stochastic (",sigma," = ","0.2)")),
-                                   expression( paste("Stochastic (",sigma," = ","0.3)")))) +
+                                   expression( paste("Stochastic (",theta," = ","0.1)")),
+                                   expression( paste("Stochastic (",theta," = ","0.2)")),
+                                   expression( paste("Stochastic (",theta," = ","0.3)")))) +
   #  scale_color_manual(name='',values=c('black','grey40','grey60','grey80'),
   scale_color_manual(name='', values = c('#000000','#3366CC','#0000FF','#9900FF'),
                      labels = c('Deterministic',
-                                expression( paste("Stochastic (",sigma," = ","0.1)")),
-                                expression( paste("Stochastic (",sigma," = ","0.2)")),
-                                expression( paste("Stochastic (",sigma," = ","0.3)")))) +
+                                expression( paste("Stochastic (",theta," = ","0.1)")),
+                                expression( paste("Stochastic (",theta," = ","0.2)")),
+                                expression( paste("Stochastic (",theta," = ","0.3)")))) +
   geom_line(data=set1,lwd=0.8,col='#000000') +
   geom_vline(xintercept=ss1,linetype=2) + 
   geom_vline(xintercept=ss2,linetype=2) + 
@@ -169,7 +169,7 @@ ggplot(data=setall,aes(x=stock,y=shadowp)) +
   labs(x='Stock (Million lb)',y='Accounting Price (p in $/lb)')
 
 ####################################################
-## Figure 7(c)
+## Figure 8(c)
 ####################################################
 set1 <- data.frame(stock=vsim0p1$stock,shadowp=vsim0p1$shadowp,key='determ1')
 set2 <- data.frame(stock=vsim0p2$stock,shadowp=vsim0p2$shadowp,key='determ2')
@@ -197,13 +197,13 @@ ggplot(data=setall,aes(x=stock,y=diff)) +
   coord_cartesian(xlim=c(0,350), ylim=c(-500,400)) +
   geom_line(lwd=0.8,aes(col=key,linetype=key)) + 
   scale_linetype_manual(name='',values=c(2,2,2),
-                        labels = c(expression( paste("Stochastic (",sigma," = ","0.1)")),
-                                   expression( paste("Stochastic (",sigma," = ","0.2)")),
-                                   expression( paste("Stochastic (",sigma," = ","0.3)")))) +
+                        labels = c(expression( paste("Stochastic (",theta," = ","0.1)")),
+                                   expression( paste("Stochastic (",theta," = ","0.2)")),
+                                   expression( paste("Stochastic (",theta," = ","0.3)")))) +
   scale_color_manual(name='',values=c('#3366CC','#0000FF','#9900FF'),
-                     labels = c(expression( paste("Stochastic (",sigma," = ","0.1)")),
-                                expression( paste("Stochastic (",sigma," = ","0.2)")),
-                                expression( paste("Stochastic (",sigma," = ","0.3)")))) +
+                     labels = c(expression( paste("Stochastic (",theta," = ","0.1)")),
+                                expression( paste("Stochastic (",theta," = ","0.2)")),
+                                expression( paste("Stochastic (",theta," = ","0.3)")))) +
   geom_line(data=set4,lty=2,lwd=0.8,col='#3366CC') +
   geom_line(data=set6,lty=2,lwd=0.8,col='#0000FF') +
   geom_line(data=set8,lty=2,lwd=0.8,col='#9900FF') +

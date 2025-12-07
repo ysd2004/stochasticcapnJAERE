@@ -26,8 +26,8 @@ delta <- 0.05
 
 ###############################################################################
 ## Steady state: deterministic
-sig <- 0
-phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(sig^2))^2)))^(1/2))/(((r+delta-(sig^2))^2))
+theta <- 0
+phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(theta^2))^2)))^(1/2))/(((r+delta-(theta^2))^2))
 
 ssfun <- function(s){
   ss <- r*s*(1-(s/K)) - b*((phi +c)^(-1/2))*s
@@ -37,8 +37,8 @@ ssfun <- function(s){
 ssd <- uniroot(ssfun,c(0.2,0.6))$root
 
 ## Steady state: stochastic when sig = 0.1
-sig <- 0.1
-phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(sig^2))^2)))^(1/2))/(((r+delta-(sig^2))^2))
+theta <- 0.1
+phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(theta^2))^2)))^(1/2))/(((r+delta-(theta^2))^2))
 
 ssfun <- function(s){
   ss <- r*s*(1-(s/K)) - b*((phi +c)^(-1/2))*s
@@ -61,11 +61,11 @@ stock0 <- chebnodegen(35,0.2,1.1)
 
 ## Optimal
 #########################################################################
-sig <- 0.1
+theta <- 0.1
 catch <- as.matrix(b*((phi +c)^(-1/2))*stockapx,ncol=1)
 profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
 mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
-sigs <- as.matrix((sig*stockapx)^2,ncol=1)
+sigs <- as.matrix((theta*stockapx)^2,ncol=1)
 
 catch.opt <- catch
 
@@ -84,7 +84,7 @@ opt.d <- vsim(vC.opt.d,stock0,profit)
 catch <- as.matrix(0.5*b*((phi +c)^(-1/2))*stockapx,ncol=1)
 profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
 mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
-sigs <- as.matrix((sig*stockapx)^2,ncol=1)
+sigs <- as.matrix((theta*stockapx)^2,ncol=1)
 
 catch.half <- catch
 
@@ -102,7 +102,7 @@ opt.half.d <- vsim(vC.opt.half.d,stock0,profit)
 catch <- as.matrix(1.5*b*((phi +c)^(-1/2))*stockapx,ncol=1)
 profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
 mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
-sigs <- as.matrix((sig*stockapx)^2,ncol=1)
+sigs <- as.matrix((theta*stockapx)^2,ncol=1)
 
 catch.2x <- catch
 
@@ -121,7 +121,7 @@ adjust <- 1/(1+1.1*(ss-stockapx))
 catch <- as.matrix(adjust*b*((phi +c)^(-1/2))*stockapx,ncol=1)
 profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
 mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
-sigs <- as.matrix((sig*stockapx)^2,ncol=1)
+sigs <- as.matrix((theta*stockapx)^2,ncol=1)
 
 catch.adp <- catch
 
@@ -134,8 +134,8 @@ vC.adaptive.d <- vaprox(Aspace,stockapx,mus,profit)
 adaptive.d <- vsim(vC.adaptive.d,stock0,profit)
 
 ## Optimal: deterministic sig=0
-sig <- 0
-phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(sig^2))^2)))^(1/2))/(((r+delta-(sig^2))^2))
+theta <- 0
+phi <- (2*(b^2)+2*b*(((b^2)+c*((r+delta-(theta^2))^2)))^(1/2))/(((r+delta-(theta^2))^2))
 
 catch <- as.matrix(b*((phi +c)^(-1/2))*stockapx,ncol=1)
 profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
@@ -172,7 +172,7 @@ adjust <- 1/(1+1.1*(ss-stockapx))
 catch <- as.matrix(adjust*b*((phi +c)^(-1/2))*stockapx,ncol=1)
 profit <- as.matrix(-((b^2)/catch)-(c/(stockapx^2))*catch,ncol=1)
 mus <- as.matrix(r*stockapx*(1-(stockapx/K)) - catch,ncol=1)
-sigs <- as.matrix((sig*stockapx)^2,ncol=1)
+sigs <- as.matrix((theta*stockapx)^2,ncol=1)
 
 catch.adp0 <- catch
 
@@ -208,9 +208,9 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key1,linetype=key2)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='Stochasticity Level', values=c(1,2)) +
   scale_color_manual(name='Economic Program', values=c("#000000","#3366CC","#FF6633"),
-                     labels = c(expression( paste( "Optimal (",sigma," varying)")),
-                                expression( paste( "(0.5) x Optimal (",sigma," = ","0.1)" )),
-                                expression( paste("1.5 x Optimal (",sigma," = ","0.1)" )))) +
+                     labels = c(expression( paste( "Optimal (",theta," varying)")),
+                                expression( paste( "(0.5) x Optimal (",theta," = ","0.1)" )),
+                                expression( paste("1.5 x Optimal (",theta," = ","0.1)" )))) +
   theme_bw() +
   theme(text = element_text(size = 14),
         legend.box = 'vertical',
@@ -224,9 +224,9 @@ g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key1,linetype=key2)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='Stochasticity Level', values=c(1,2)) +
   scale_color_manual(name='Economic Program', values=c("#000000","#3366CC","#FF6633"),
-                     labels = c(expression( paste( "Optimal (",sigma," varying)")),
-                                expression( paste( "(0.5) x Optimal (",sigma," = ","0.1)" )),
-                                expression( paste("1.5 x Optimal (",sigma," = ","0.1)" )))) +
+                     labels = c(expression( paste( "Optimal (",theta," varying)")),
+                                expression( paste( "(0.5) x Optimal (",theta," = ","0.1)" )),
+                                expression( paste("1.5 x Optimal (",theta," = ","0.1)" )))) +
   theme_bw() +
   theme(text = element_text(size = 14),
         legend.box = 'vertical',

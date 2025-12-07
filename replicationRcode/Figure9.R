@@ -129,7 +129,7 @@ cvPSS5 <- vaproxpss(Aspace,s,mus,w,hs)
 vPSS5 <- vsim(cvPSS5,s1)
 
 ####################################################
-## Figure 8
+## Figure 9
 ####################################################
 set1 <- data.frame(stock=vDET$stock,vfun=vDET$vfun*100,shadowp=vDET$shadowp*100,
                    key='Deterministic')

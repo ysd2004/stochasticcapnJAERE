@@ -77,10 +77,10 @@ qoptDET <- qfun(s,vsim(cvDET,s)$shadowp)
 
 ###############################################################################
 ## Figure 5 in the manuscript 
-## GBM with sigma0 = 0.1
+## GBM with theta0 = 0.1
 ###############################################################################
-sigma0 <- 0.1
-sigsGBM <- as.matrix((sigma0*s)^2,col=1)
+theta0 <- 0.1
+sigsGBM <- as.matrix((theta0*s)^2,col=1)
 
 cvGBM <- vaproxsc(Aspace,s,gfun,sigsGBM)
 vGBM <- vsim(cvGBM,s1)
@@ -89,9 +89,9 @@ vGBM <- vsim(cvGBM,s1)
 ssGBM <- 57.94068
 
 ## DEM+ENV
-sigmaM <- 0.1481263
+thetaM <- 0.1481263
 
-sigsDEM <- as.matrix(r*s*(((M+C)/(M-C))+(1-2*mu)*(s/K))+((sigmaM*R*s*(1-s/K1))^2),col=1)
+sigsDEM <- as.matrix(r*s*(((M+C)/(M-C))+(1-2*mu)*(s/K))+((thetaM*R*s*(1-s/K1))^2),col=1)
 
 cvDEM <- vaproxsc(Aspace,s,gfun,sigsDEM)
 vDEM <- vsim(cvDEM,s1)
@@ -113,12 +113,12 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key2,linetype=key2)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='', values=c(1,2,3),
                         labels = c('Deterministic',
-                                   expression( paste("GBM (",sigma[0]," = ","0.1)")),
-                                   expression( paste("DEM+ENV (",sigma[M]," = ","0.1481 at ssGBM)")))) +
+                                   expression( paste("GBM (",theta[0]," = ","0.1)")),
+                                   expression( paste("DEM+ENV (",theta[M]," = ","0.1481 at ssGBM)")))) +
   scale_color_manual(name='', values=c('#000000','#3366CC','#9900FF'),
                      labels = c('Deterministic',
-                                expression( paste("GBM (",sigma[0]," = ","0.1)")),
-                                expression( paste("DEM+ENV (",sigma[M]," = ","0.1481 at ssGBM)")))) +
+                                expression( paste("GBM (",theta[0]," = ","0.1)")),
+                                expression( paste("DEM+ENV (",theta[M]," = ","0.1481 at ssGBM)")))) +
   geom_vline(xintercept=ssGBM,linetype=2,colour='#3366CC') +
   theme_bw() +
   theme(text = element_text(size = 14),
@@ -134,12 +134,12 @@ g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key2,linetype=key2)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='', values=c(1,2,3),
                         labels = c('Deterministic',
-                                   expression( paste("GBM (",sigma[0]," = ","0.1)")),
-                                   expression( paste("DEM+ENV (",sigma[M]," = ","0.1481 at ssGBM)")))) +
+                                   expression( paste("GBM (",theta[0]," = ","0.1)")),
+                                   expression( paste("DEM+ENV (",theta[M]," = ","0.1481 at ssGBM)")))) +
   scale_color_manual(name='', values=c('#000000','#3366CC','#9900FF'),
                      labels = c('Deterministic',
-                                expression( paste("GBM (",sigma[0]," = ","0.1)")),
-                                expression( paste("DEM+ENV (",sigma[M]," = ","0.1481 at ssGBM)")))) +
+                                expression( paste("GBM (",theta[0]," = ","0.1)")),
+                                expression( paste("DEM+ENV (",theta[M]," = ","0.1481 at ssGBM)")))) +
   geom_vline(xintercept=ssGBM,linetype=2,colour='#3366CC') +
   theme_bw() +
   theme(text = element_text(size = 14),
@@ -157,10 +157,10 @@ Figure5
 
 ###############################################################################
 ## Figure 6 in the manuscript 
-## GBM with sigma0 = 0.15
+## GBM with theta0 = 0.15
 ###############################################################################
-sigma0 <- 0.15
-sigsGBM <- as.matrix((sigma0*s)^2,col=1)
+theta0 <- 0.15
+sigsGBM <- as.matrix((theta0*s)^2,col=1)
 
 cvGBM <- vaproxsc(Aspace,s,gfun,sigsGBM)
 vGBM <- vsim(cvGBM,s1)
@@ -169,9 +169,9 @@ vGBM <- vsim(cvGBM,s1)
 ssGBM <- 58.57256
 
 ## DEM+ENV
-sigmaM <- 0.2747174
+thetaM <- 0.2747174
 
-sigsDEM <- as.matrix(r*s*(((M+C)/(M-C))+(1-2*mu)*(s/K))+((sigmaM*R*s*(1-s/K1))^2),col=1)
+sigsDEM <- as.matrix(r*s*(((M+C)/(M-C))+(1-2*mu)*(s/K))+((thetaM*R*s*(1-s/K1))^2),col=1)
 
 cvDEM <- vaproxsc(Aspace,s,gfun,sigsDEM)
 vDEM <- vsim(cvDEM,s1)
@@ -193,12 +193,12 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key2,linetype=key2)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='', values=c(1,2,3),
                         labels = c('Deterministic',
-                                   expression( paste("GBM (",sigma[0]," = ","0.15)")),
-                                   expression( paste("DEM+ENV (",sigma[M]," = ","0.2747 at ssGBM)")))) +
+                                   expression( paste("GBM (",theta[0]," = ","0.15)")),
+                                   expression( paste("DEM+ENV (",theta[M]," = ","0.2747 at ssGBM)")))) +
   scale_color_manual(name='', values=c('#000000','#3366CC','#9900FF'),
                      labels = c('Deterministic',
-                                expression( paste("GBM (",sigma[0]," = ","0.15)")),
-                                expression( paste("DEM+ENV (",sigma[M]," = ","0.2747 at ssGBM)")))) +
+                                expression( paste("GBM (",theta[0]," = ","0.15)")),
+                                expression( paste("DEM+ENV (",theta[M]," = ","0.2747 at ssGBM)")))) +
   geom_vline(xintercept=ssGBM,linetype=2,colour='#3366CC') +
   theme_bw() +
   theme(text = element_text(size = 14),
@@ -214,12 +214,12 @@ g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key2,linetype=key2)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='', values=c(1,2,3),
                         labels = c('Deterministic',
-                                   expression( paste("GBM (",sigma[0]," = ","0.15)")),
-                                   expression( paste("DEM+ENV (",sigma[M]," = ","0.2747 at ssGBM)")))) +
+                                   expression( paste("GBM (",theta[0]," = ","0.15)")),
+                                   expression( paste("DEM+ENV (",theta[M]," = ","0.2747 at ssGBM)")))) +
   scale_color_manual(name='', values=c('#000000','#3366CC','#9900FF'),
                      labels = c('Deterministic',
-                                expression( paste("GBM (",sigma[0]," = ","0.15)")),
-                                expression( paste("DEM+ENV (",sigma[M]," = ","0.2747 at ssGBM)")))) +
+                                expression( paste("GBM (",theta[0]," = ","0.15)")),
+                                expression( paste("DEM+ENV (",theta[M]," = ","0.2747 at ssGBM)")))) +
   geom_vline(xintercept=ssGBM,linetype=2,colour='#3366CC') +
   theme_bw() +
   theme(text = element_text(size = 14),
