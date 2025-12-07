@@ -7,7 +7,7 @@ Department of Agricultural Economics\
 Mississippi State University\
 **<seong.yun@msstate.edu>**\
 **<https://sites.google.com/site/yunsd2004/>**\
-*Last updated: Nov. 25, 2024*
+*Last updated: Dec. 6, 2025*
 
 ------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ This example is Example 1 in Pindyck (1984, pp. 296-297), which is Figure 2 and 
 With $\eta=1/2$ and $\gamma=2$, the stock evolves according to a logistic drift with geometric Brownian motion as:
 
 $$
-ds = \left[ rs(1-s/K)-q \right] dt + \sigma s \ dZ
+ds = \left[ rs(1-s/K)-q \right] dt + \theta s \ dZ
 $$
 
 where $s$ is a stock, $r$ is the intrinsic growth rate, $K$ is the carrying capacity, $q$ is a harvest level, $\sigma$ is stock volatility, and $dZ$ is an increment of a Wiener process.
@@ -45,7 +45,7 @@ $$
 \text{Economic program: } x(s) = q^*(s) = \frac{bs}{(\phi+c)^{(1/2)}} \text{,}
 $$
 
-where $\phi = \frac{2b^2+2b[b^2+c(r+\delta-\sigma^2)^2]^{1/2}}{(r+\delta-\sigma^2)^2}$.
+where $\phi = \frac{2b^2+2b[b^2+c(r+\delta-\theta^2)^2]^{1/2}}{(r+\delta-\theta^2)^2}$.
 
 To download the replication R-code,
 
@@ -57,9 +57,9 @@ To download the replication R-code,
 ## Non-GBM stochasticity
 This example extends the GBM volatility to the demographic and environmental stochasticity in Sims, Horan, and Meadows (2018), which is Fgiure5 and Figure6 in the manuscript.
 
-* GBM: $\sigma_{0}^{2} s^{2}$
+* GBM: $\theta_{0}^{2} s^{2}$
 
-* demographic and environmental: $\tilde{r}s \left( \frac{\tilde{M}+\tilde{C}}{\tilde{M}-\tilde{C}}  +(1-2 \mu) \frac{s}{\tilde{K}}\right) + \sigma_{M}^{2} \tilde{R}^2 s^{2} \left[ 1 - \frac{s}{K_{1}} \right]^2$
+* demographic and environmental: $\tilde{r}s \left( \frac{\tilde{M}+\tilde{C}}{\tilde{M}-\tilde{C}}  +(1-2 \mu) \frac{s}{\tilde{K}}\right) + \theta_{M}^{2} \tilde{R}^2 s^{2} \left[ 1 - \frac{s}{K_{1}} \right]^2$
 
 As shown in Table C.1, the economic parameters are the same in Figure 2 and Figure 3. The ecological parameters are:
 
@@ -115,9 +115,9 @@ To replicate Figure8, download the R-code with:
 In the code, there is the line to download the data of all brute force forward simulations (*simresult.rda*) detailed below. 
 
 * *sto00.rda*: deterministic
-* *sto01.rda*: stocastic with $\sigma=0.1$
-* *sto02.rda*: stocastic with $\sigma=0.2$
-* *sto03.rda*: stocastic with $\sigma=0.3$
+* *sto01.rda*: stocastic with $\theta=0.1$
+* *sto02.rda*: stocastic with $\theta=0.2$
+* *sto03.rda*: stocastic with $\theta=0.3$
 
 Example 3: A stock with convex drift and stochastic non-convexity
 ====================================
