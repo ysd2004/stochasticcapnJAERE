@@ -115,7 +115,7 @@ ggplot(data=setall,aes(x=stock,y=vfun)) +
         legend.text.align = 0) +
   annotate(geom="text", x=ss1, y=12.2, label="Steady State 1",color="black") +
   annotate(geom="text", x=ss2, y=12.2, label="Steady State 2",color="black") +
-  labs(x='Stock (Million lb)',y='Intertemproal Welafare (V in $ Billions)')
+  labs(x='Stock (Million lb)',y='Value Function (V in $ Billions)')
 
 ####################################################
 ## Figure 8(b)

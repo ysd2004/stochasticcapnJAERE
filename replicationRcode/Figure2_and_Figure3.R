@@ -217,7 +217,7 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key1,linetype=key2)) +
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=10)) +
-  labs(x='Stock',y='Intertemporal Welfare (V)')
+  labs(x='Stock',y='Value Function (V)')
 
 g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key1,linetype=key2)) + 
   coord_cartesian(xlim=c(0.2,1.1), ylim=c(0,600)) +
@@ -270,7 +270,7 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key1,linetype=key2)) +
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=15)) +
-  labs(x='Stock',y='Intertemporal Welfare (V)') +
+  labs(x='Stock',y='Value Function (V)') +
   annotate(geom="text", x=ss, y=-279, label="Steady State",color="black") 
 
 g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key1,linetype=key2)) + 
