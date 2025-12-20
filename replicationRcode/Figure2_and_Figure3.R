@@ -182,18 +182,17 @@ adaptive.d0 <- vsim(vC.adaptive.d0,stock0,profit)
 
 #########################################################################
 ## Figure 2 in the manuscript
-set1 <- data.frame(stock=opt.s$stock,vfun=opt.s$vfun,shadowp=opt.s$shadowp,
+set1 <- data.frame(stock=opt.s$stock*100,vfun=opt.s$vfun,shadowp=opt.s$shadowp/100,
                    key1='Optimal',key2='Stochastic')
-set2 <- data.frame(stock=opt.d0$stock,vfun=opt.d0$vfun,shadowp=opt.d0$shadowp,
+set2 <- data.frame(stock=opt.d0$stock*100,vfun=opt.d0$vfun,shadowp=opt.d0$shadowp/100,
                    key1='Optimal',key2='Deterministic')
-
-set3 <- data.frame(stock=opt.half.s$stock,vfun=opt.half.s$vfun,shadowp=opt.half.s$shadowp,
+set3 <- data.frame(stock=opt.half.s$stock*100,vfun=opt.half.s$vfun,shadowp=opt.half.s$shadowp/100,
                    key1='(1/2) x Optimal',key2='Stochastic')
-set4 <- data.frame(stock=opt.half.d$stock,vfun=opt.half.d$vfun,shadowp=opt.half.d0$shadowp,
+set4 <- data.frame(stock=opt.half.d$stock*100,vfun=opt.half.d$vfun,shadowp=opt.half.d0$shadowp/100,
                    key1='(1/2) x Optimal',key2='Deterministic')
-set5 <- data.frame(stock=opt.2x.s$stock,vfun=opt.2x.s$vfun,shadowp=opt.2x.s$shadowp,
+set5 <- data.frame(stock=opt.2x.s$stock*100,vfun=opt.2x.s$vfun,shadowp=opt.2x.s$shadowp/100,
                    key1='(1.5) x Optimal',key2='Stochastic')
-set6 <- data.frame(stock=opt.2x.d$stock,vfun=opt.2x.d$vfun,shadowp=opt.2x.d0$shadowp,
+set6 <- data.frame(stock=opt.2x.d$stock*100,vfun=opt.2x.d$vfun,shadowp=opt.2x.d0$shadowp/100,
                    key1='(1.5) x Optimal',key2='Deterministic')
 
 setall <- rbind(set1,set2,set3,set4,set5,set6)
@@ -204,7 +203,7 @@ setall$key2 <- factor(setall$key2, levels = c('Deterministic',
                                               'Stochastic'))
 
 g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key1,linetype=key2)) + 
-  coord_cartesian(xlim=c(0.2,1.1), ylim=c(-350,-180)) +
+  coord_cartesian(xlim=c(20,110), ylim=c(-350,-180)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='Stochasticity Level', values=c(1,2)) +
   scale_color_manual(name='Economic Program', values=c("#000000","#3366CC","#FF6633"),
@@ -217,10 +216,10 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key1,linetype=key2)) +
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=10)) +
-  labs(x='Stock',y='Value Function (V)')
+  labs(x='Stock (% K)',y='Value Function (V)')
 
 g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key1,linetype=key2)) + 
-  coord_cartesian(xlim=c(0.2,1.1), ylim=c(0,600)) +
+  coord_cartesian(xlim=c(20,110), ylim=c(0,6)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='Stochasticity Level', values=c(1,2)) +
   scale_color_manual(name='Economic Program', values=c("#000000","#3366CC","#FF6633"),
@@ -233,7 +232,7 @@ g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key1,linetype=key2)) +
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=10)) +
-  labs(x='Stock',y='Accounting Price (p)')
+  labs(x='Stock (% K)',y='Accounting Price (p)')
 
 Figure2 <- ggarrange(g1, g2, nrow=1,ncol=2, common.legend = TRUE, legend="bottom")
 
@@ -241,13 +240,13 @@ Figure2
 
 #########################################################################
 ## Figure 3 in the manuscript
-set1 <- data.frame(stock=opt.s$stock,vfun=opt.s$vfun,shadowp=opt.s$shadowp,
+set1 <- data.frame(stock=opt.s$stock*100,vfun=opt.s$vfun,shadowp=opt.s$shadowp/100,
                    key1='Optimal',key2='Stochastic')
-set2 <- data.frame(stock=opt.d$stock,vfun=opt.d$vfun,shadowp=opt.d$shadowp,
+set2 <- data.frame(stock=opt.d$stock*100,vfun=opt.d$vfun,shadowp=opt.d$shadowp/100,
                    key1='Optimal',key2='Deterministic')
-set3 <- data.frame(stock=adaptive.s$stock,vfun=adaptive.s$vfun,shadowp=adaptive.s$shadowp,
+set3 <- data.frame(stock=adaptive.s$stock*100,vfun=adaptive.s$vfun,shadowp=adaptive.s$shadowp/100,
                    key1='Adaptive',key2='Stochastic')
-set4 <- data.frame(stock=adaptive.d$stock,vfun=adaptive.d$vfun,shadowp=adaptive.d$shadowp,
+set4 <- data.frame(stock=adaptive.d$stock*100,vfun=adaptive.d$vfun,shadowp=adaptive.d$shadowp/100,
                    key1='Adaptive',key2='Deterministic')
 
 setall <- rbind(set1,set2,set3,set4)
@@ -258,36 +257,36 @@ setall$key2 <- factor(setall$key2, levels = c('Stochastic',
                                               'Deterministic'))
 
 g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key1,linetype=key2)) + 
-  coord_cartesian(xlim=c(0.2,1.1), ylim=c(-280,-180)) +
+  coord_cartesian(xlim=c(20,110), ylim=c(-280,-180)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='Stochasticity Level', values=c(2,1)) +
   scale_color_manual(name='Economic Program', values=c('#000000','#CC0000'),
                      labels = c('Optimal','Adaptive')) +
-  geom_vline(xintercept=ss,linetype=2) +
+  geom_vline(xintercept=ss*100,linetype=2) +
   theme_bw() +
   theme(text = element_text(size = 14),
         legend.box = 'vertical',
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=15)) +
-  labs(x='Stock',y='Value Function (V)') +
-  annotate(geom="text", x=ss, y=-279, label="Steady State",color="black") 
+  labs(x='Stock (% K)',y='Value Function (V)') +
+  annotate(geom="text", x=ss*100, y=-279, label="Steady State",color="black") 
 
 g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key1,linetype=key2)) + 
-  coord_cartesian(xlim=c(0.2,1.1), ylim=c(0,500)) +
+  coord_cartesian(xlim=c(20,110), ylim=c(0,5)) +
   geom_line(lwd=0.8) + 
   scale_linetype_manual(name='Stochasticity Level', values=c(2,1)) +
   scale_color_manual(name='Economic Program', values=c('#000000','#CC0000'),
                      labels = c('Optimal','Adaptive')) +
-  geom_vline(xintercept=ss,linetype=2) +
+  geom_vline(xintercept=ss*100,linetype=2) +
   theme_bw() +
   theme(text = element_text(size = 14),
         legend.box = 'vertical',
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=15)) +
-  labs(x='Stock',y='Accounting Price (p)') +
-  annotate(geom="text", x=ss, y=10, label="Steady State",color="black") 
+  labs(x='Stock (% K)',y='Accounting Price (p)') +
+  annotate(geom="text", x=ss*100, y=0.1, label="Steady State",color="black") 
 
 Figure3 <- ggarrange(g1, g2, nrow=1,ncol=2, common.legend = TRUE, legend="bottom")
 

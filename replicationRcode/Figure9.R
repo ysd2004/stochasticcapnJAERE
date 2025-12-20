@@ -165,7 +165,7 @@ g1 <- ggplot(data=setall,aes(x=stock,y=vfun,col=key2,linetype=key2)) +
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=14)) +
-  labs(x='Stock',y='Value Function (V)')
+  labs(x='Stock (% K)',y='Value Function (V)')
 
 g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key2,linetype=key2)) + 
   coord_cartesian(xlim=c(20,100), ylim=c(0,9)) +
@@ -188,7 +188,7 @@ g2 <- ggplot(data=setall,aes(x=stock,y=shadowp,col=key2,linetype=key2)) +
         legend.box.just = 'left',
         legend.spacing.y = unit(-0.2, "cm"),
         legend.text = element_text(size=14)) +
-  labs(x='Stock',y='Accounting Price (p)')
+  labs(x='Stock (% K)',y='Accounting Price (p)')
 
 Figure9 <- ggarrange(g1, g2, nrow=1,ncol=2, common.legend = TRUE, legend="bottom")
 
