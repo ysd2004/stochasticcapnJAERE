@@ -5,6 +5,7 @@
 ## Figure 5 and Figure 6
 ###############################################################################
 ## R-packages used in the examples
+library(capn)
 library(ggplot2)
 library(ggpubr)
 library(RColorBrewer)
@@ -12,8 +13,6 @@ library(rootSolve)
 library(tidyverse)
 
 rm(list=ls())
-## load pre-defined functions
-source(url('https://raw.githubusercontent.com/ysd2004/stochasticcapnJAERE/refs/heads/main/data_and_fncs/functions.R'))
 
 ## parameters (see Table C.1)
 b <- 1
@@ -33,25 +32,6 @@ K <- 100
 G <- ((M-C)/K)-M*L
 mu <- 1
 
-## net growth function
-gfun <- function(s){
-  netgrowth <- r*s*(1-(s/K))
-  return(netgrowth)
-}
-
-## catch function
-qfun <- function(s,Vs){
-  qout <- b*((Vs+c/(s^gamma))^(-eta))
-  return(qout)
-}
-
-## drift function
-mufun <- function(s,q){
-  muout <- growthfun(s) - q
-  return(muout)
-}
-
-
 ###############################################################################
 ## Define domains and nodes
 
@@ -69,10 +49,13 @@ s1 <- s1[s1<K]
 ###############################################################################
 ## Deterministic
 ###############################################################################
-cvDET <- vaproxsc(Aspace,s,gfun)
+param <- data.frame(r=r,K=K,b=b,eta=eta,c=c,gamma=gamma,delta=delta,order=nnode,
+                    nodes=nnode,upperK=upper,lowerK=lower)
+
+cvDET <- vaprox.pindyck(param,'logistic')
 vDET <- vsim(cvDET,s1)
 
-qoptDET <- qfun(s,vsim(cvDET,s)$shadowp)
+qoptDET <- cvDET$qfun(param,s,vsim(cvDET,s)$shadowp)
 ###############################################################################
 
 ###############################################################################
@@ -82,7 +65,7 @@ qoptDET <- qfun(s,vsim(cvDET,s)$shadowp)
 theta0 <- 0.1
 sigsGBM <- as.matrix((theta0*s)^2,col=1)
 
-cvGBM <- vaproxsc(Aspace,s,gfun,sigsGBM)
+cvGBM <- vaprox.pindyck(param,'logistic',sigsGBM)
 vGBM <- vsim(cvGBM,s1)
 
 ## GBM steady-state
@@ -93,7 +76,7 @@ thetaM <- 0.1481263
 
 sigsDEM <- as.matrix(r*s*(((M+C)/(M-C))+(1-2*mu)*(s/K))+((thetaM*R*s*(1-s/K1))^2),col=1)
 
-cvDEM <- vaproxsc(Aspace,s,gfun,sigsDEM)
+cvDEM <- vaprox.pindyck(param,'logistic',sigsDEM)
 vDEM <- vsim(cvDEM,s1)
 
 ## Figure data setup
@@ -162,7 +145,7 @@ Figure5
 theta0 <- 0.15
 sigsGBM <- as.matrix((theta0*s)^2,col=1)
 
-cvGBM <- vaproxsc(Aspace,s,gfun,sigsGBM)
+cvGBM <- vaprox.pindyck(param,'logistic',sigsGBM)
 vGBM <- vsim(cvGBM,s1)
 
 ## GBM steady-state
@@ -173,7 +156,7 @@ thetaM <- 0.2747174
 
 sigsDEM <- as.matrix(r*s*(((M+C)/(M-C))+(1-2*mu)*(s/K))+((thetaM*R*s*(1-s/K1))^2),col=1)
 
-cvDEM <- vaproxsc(Aspace,s,gfun,sigsDEM)
+cvDEM <- vaprox.pindyck(param,'logistic',sigsDEM)
 vDEM <- vsim(cvDEM,s1)
 
 ## Figure data setup

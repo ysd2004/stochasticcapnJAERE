@@ -4,6 +4,8 @@
 ## Figure 2 and Figure 3
 ###############################################################################
 ## R-packages used in the examples
+## R-packages used in the examples
+library(capn)
 library(ggplot2)
 library(ggpubr)
 library(RColorBrewer)
@@ -11,8 +13,6 @@ library(rootSolve)
 library(tidyverse)
 
 rm(list=ls())
-## load pre-defined functions
-source(url('https://raw.githubusercontent.com/ysd2004/stochasticcapnJAERE/refs/heads/main/data_and_fncs/functions.R'))
 
 ###############################################################################
 ## Define parameters

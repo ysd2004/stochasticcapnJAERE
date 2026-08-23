@@ -3,6 +3,7 @@
 ## Figure 9
 ###############################################################################
 ## R-packages used in the examples
+library(capn)
 library(ggplot2)
 library(ggpubr)
 library(RColorBrewer)
@@ -10,8 +11,6 @@ library(rootSolve)
 library(tidyverse)
 
 rm(list=ls())
-## load pre-defined functions
-source(url('https://raw.githubusercontent.com/ysd2004/stochasticcapnJAERE/refs/heads/main/data_and_fncs/functions.R'))
 
 ## parameters (see Table C.1)
 b <- 1
@@ -31,34 +30,6 @@ K <- 100
 G <- ((M-C)/K)-M*L
 mu <- 1
 
-## net growth function
-gfun <- function(s){
-  netgrowth <- r*s*(1-(s/K))
-  return(netgrowth)
-}
-
-## catch function
-qfun <- function(s,Vs){
-  qout <- b*((Vs+c/(s^gamma))^(-eta))
-  return(qout)
-}
-
-## drift function
-mufun <- function(s,q){
-  muout <- r*s*(1-(s/K)) - q
-  return(muout)
-}
-
-## profit function
-wfun <- function(s,q){
-  if (eta == 1){
-    wout <- b*log(q)-(c/(s^gamma))*q
-  } else {
-    wout <- (b^(1/eta))/(1-(1/eta))*(q^(1-(1/eta)))-(c/(s^gamma))*q
-  }
-  return(wout)
-}
-
 ###############################################################################
 ## Define domains and nodes
 
@@ -76,10 +47,13 @@ s1 <- s1[s1<K]
 ###############################################################################
 ## Deterministic
 ###############################################################################
-cvDET <- vaproxsc(Aspace,s,gfun)
+param <- data.frame(r=r,K=K,b=b,eta=eta,c=c,gamma=gamma,delta=delta,order=nnode,
+                    nodes=nnode,upperK=upper,lowerK=lower)
+
+cvDET <- vaprox.pindyck(param,'logistic')
 vDET <- vsim(cvDET,s1)
 
-qoptDET <- qfun(s,vsim(cvDET,s)$shadowp)
+qoptDET <- cvDET$qfun(param,s,vsim(cvDET,s)$shadowp)
 ###############################################################################
 
 ###############################################################################
@@ -88,9 +62,9 @@ qoptDET <- qfun(s,vsim(cvDET,s)$shadowp)
 ## the minimum stock level
 slow <- 10
 vlow <- vsim(cvDET,as.matrix(slow))
-qlow <- qfun(slow,vlow$shadowp)
-z <- c(wfun(slow,qlow)/delta)
-mus <- mufun(s,qoptDET)
+qlow <- cvDET$qfun(param,slow,vlow$shadowp)
+z <- c(cvDET$wfun(param,slow,qlow)/param$delta)
+mus <-cvDET$gfun(param,s) - qoptDET
 
 ###############################################################################
 ## alpha = 0.5
@@ -98,9 +72,9 @@ alpha <- 1/2
 
 hs <- alpha/(alpha+s)
 
-w <- wfun(s,qoptDET) + hs*z
+w <- cvDET$wfun(param,s,qoptDET)
 
-cvPSShalf <- vaproxpss(Aspace,s,mus,w,hs)
+cvPSShalf <- vaprox.pjump(Aspace,s,mus,w,hs,z)
 
 vPSShalf <- vsim(cvPSShalf,s1)
 
@@ -110,9 +84,7 @@ alpha <- 2
 
 hs <- alpha/(alpha+s)
 
-w <- wfun(s,qoptDET) + hs*z
-
-cvPSS2 <- vaproxpss(Aspace,s,mus,w,hs)
+cvPSS2 <- vaprox.pjump(Aspace,s,mus,w,hs,z)
 
 vPSS2 <- vsim(cvPSS2,s1)
 
@@ -122,9 +94,7 @@ alpha <- 5
 
 hs <- alpha/(alpha+s)
 
-w <- wfun(s,qoptDET) + hs*z
-
-cvPSS5 <- vaproxpss(Aspace,s,mus,w,hs)
+cvPSS5 <- vaprox.pjump(Aspace,s,mus,w,hs,z)
 
 vPSS5 <- vsim(cvPSS5,s1)
 

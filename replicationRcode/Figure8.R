@@ -3,6 +3,7 @@
 ## Figure 8
 ###############################################################################
 ## R-packages used in the examples
+library(capn)
 library(ggplot2)
 library(ggpubr)
 library(RColorBrewer)
@@ -180,12 +181,12 @@ set6 <- data.frame(stock=vsim22$stock[101:200],shadowp=vsim22$shadowp[101:200],k
 set7 <- data.frame(stock=vsim32$stock[1:100],shadowp=vsim32$shadowp[1:100],key='sto31')
 set8 <- data.frame(stock=vsim32$stock[101:200],shadowp=vsim32$shadowp[101:200],key='sto32')
 
-set3$diff <- set3$shadowp - set1$acc.price1
-set4$diff <- set4$shadowp - set2$acc.price1
-set5$diff <- set5$shadowp - set1$acc.price1
-set6$diff <- set6$shadowp - set2$acc.price1
-set7$diff <- set7$shadowp - set1$acc.price1
-set8$diff <- set8$shadowp - set2$acc.price1
+set3$diff <- set3$shadowp - set1$shadowp1
+set4$diff <- set4$shadowp - set2$shadowp1
+set5$diff <- set5$shadowp - set1$shadowp1
+set6$diff <- set6$shadowp - set2$shadowp1
+set7$diff <- set7$shadowp - set1$shadowp1
+set8$diff <- set8$shadowp - set2$shadowp1
 
 
 setall <- rbind(set3,set5,set7)
