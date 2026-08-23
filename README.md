@@ -1,13 +1,13 @@
 # Replicable Examples: Abbott, Fenichel, and Yun
 
-This repository is to share the *R* data and code replicating the main results submitted to JAERE by Abbott, Fenichel, and Yun.
+This repository is to share the *R* data and code replicating the main results submitted to JAERE by Abbott, Fenichel, and Yun (2026).
 
 GitHub Repository maintained by: Seong Yun\
 Department of Agricultural Economics\
 Mississippi State University\
 **<seong.yun@msstate.edu>**\
 **<https://sites.google.com/site/yunsd2004/>**\
-*Last updated: Dec. 6, 2025*
+*Last updated: Aug. 22, 2026*
 
 ------------------------------------------------------------------------
 
@@ -15,7 +15,10 @@ Manuscript information
 ====================================
 
 ```r
-  Abbott, K. Joshua, Eli P. Fenichel, and Seong, D. Yun, "Risky (Natural) Assets: Stochasticity and the Value of Natural Capital"
+  Abbott, K. Joshua, Eli P. Fenichel, and Seong, D. Yun, 2026, 
+  "Risky (Natural) Assets: Stochasticity and the Value of Natural Capital,"
+  Journal of the Association of Environmental and Resource Economists,
+  13(5): 1269--1309.
 ```
 
 Example 1: Optimized and non-optimized renewable resource management under convexity
